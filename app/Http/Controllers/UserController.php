@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
-        $user = DB::table('users')->get();
+        $users = DB::table('users')->get();
 
-        return view('users.index', ['users' => $user]);
+        return view('users.index', ['users' => $users]);
     
     }
 }

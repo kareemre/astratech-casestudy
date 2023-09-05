@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\impexp;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ImportFileRequest;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ImportController extends Controller
 {
-    public function import(Request $request) 
+   
+    /**
+     * importing .xlsx files
+     * @param \App\Http\Requests\ImportFileRequest $request
+     * @return \Illuminate\Http\RedirectResponse|mixed
+     */
+    public function import(ImportFileRequest $request) 
     {
-        $request->validate([
-
-            'import_file'=>'required|mimes:xls,xlsx'
-
-        ]);
-        $file = $request->file('import_file'); 
-        Excel::import(new UsersImport, $file);    
+        $fileValidation = $request->validated();
+        Excel::import(new UsersImport, $request->file('import_file'));    
         return redirect('/users')->with('success', 'All good!');
     }
 }

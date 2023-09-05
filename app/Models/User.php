@@ -17,12 +17,18 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    public $timestamps = false;
+
     protected $fillable = [
         'full_name',
         'email',
         'phone_number',
     ];
+
+    /**
+     * Disabling DB timestamps columns
+     * @var boolean
+     */
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for serialization.
