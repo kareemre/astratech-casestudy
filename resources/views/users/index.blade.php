@@ -1,40 +1,7 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <title>Export Data to Excel in Laravel using Maatwebsite</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style type="text/css">
-   .box{
-    width:600px;
-    margin:0 auto;
-    border:1px solid #ccc;
-   }
-  </style>
- </head>
- <body>
+<x-layout>
   <br />
-  <div class="container">
-    
-     <br />
-     @if(count($errors) > 0)
-     <div class="alert alert-danger">
-      Upload Validation Error<br><br>
-      <ul>
-       @foreach($errors->all() as $error)
-       <li>{{ $error }}</li>
-       @endforeach
-      </ul>
-     </div>
-    @endif
- 
-    @if($message = Session::get('success'))
-    <div class="alert alert-success alert-block">
-     <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
-    </div>
-    @endif
+   @include('partials._errors');
+   
     <form method="post" action="{{ route('import') }}" enctype="multipart/form-data">
      @csrf
      <div class="form-group">
@@ -44,6 +11,8 @@
          <input type="submit" value="import">
      </div>
     </form>
+    @include('partials._sessions');
+
   <div class="container">
    <div align="center">
     <a href="{{ route('export') }}" class="btn btn-success">Export to Excel</a>
@@ -69,5 +38,4 @@
    </div>
    
   </div>
- </body>
-</html>
+</x-layout>

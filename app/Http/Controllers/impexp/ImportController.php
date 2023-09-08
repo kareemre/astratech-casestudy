@@ -21,7 +21,7 @@ class ImportController extends Controller
     {
         $fileValidation = $request->validated();
         Excel::import(new UsersImport, $request->file('import_file'));    
-        return redirect('/users')->with('success', 'All good!');
+        return redirect('/users')->with('success', 'Imported Successfully!');
     }
 }
 
